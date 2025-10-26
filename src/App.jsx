@@ -493,7 +493,7 @@ const SkillsBubblesPhysics = () => {
     const world = engine.world;
 
     // Walls (Static bodies to contain the bubbles)
-    const wallOptions = { isStatic: true, restitution: 1.0, friction: 0 }; // Added restitution 1.0 for perfect bounce
+    const wallOptions = { isStatic: true, restitution: 1.0, frictionAir:0, friction: 0, density:0.01}; // Added restitution 1.0 for perfect bounce
 
     const walls = [
       // Top Wall: Center is half the thickness above the visible edge (y=-20)
@@ -684,7 +684,14 @@ const ProjectsCarousel3D = () => {
           return (
             <motion.div
               key={p.title}
-              className={`absolute w-[260px] md:w-[340px] rounded-xl overflow-hidden ${glassPanel} border border-cyan-400/30 shadow-lg cursor-grab active:cursor-grabbing`}
+//              className={`absolute w-[260px] md:w-[340px] rounded-xl overflow-hidden ${glassPanel} border border-cyan-400/30 shadow-lg cursor-grab active:cursor-grabbing`}
+
+
+		className={`absolute w-[260px] md:w-[340px] rounded-xl overflow-hidden ${glassPanel} 
+		  ${isCenter ? "border-2 border-cyan-400 shadow-[0_0_25px_rgba(34,211,238,0.8)]" : "border border-cyan-400/30"} 
+		  cursor-grab active:cursor-grabbing`}
+
+
               animate={{
                 x: t.x,
                 scale: t.scale,
@@ -741,6 +748,7 @@ const ProjectsCarousel3D = () => {
         })}
       </div>
 
+{/*
       <div className="flex gap-6 mt-6">
         <button
           onClick={prev}
@@ -755,6 +763,26 @@ const ProjectsCarousel3D = () => {
           Next ›
         </button>
       </div>
+*/}
+
+
+	{/* Left button */}
+	<button
+	  onClick={prev}
+	  className={`absolute left-4 top-1/2 -translate-y-1/2 px-3 py-2 rounded-full ${glassPanel} ${neonRing} text-slate-200 hover:text-cyan-300 z-50`}
+	>
+	  &lt;
+	</button>
+
+	{/* Right button */}
+	<button
+	  onClick={next}
+	  className={`absolute right-4 top-1/2 -translate-y-1/2 px-3 py-2 rounded-full ${glassPanel} ${neonRing} text-slate-200 hover:text-cyan-300 z-50`}
+	>
+	  &gt;
+	</button>
+
+
     {/* 👇 Add this block */}
     <div className="mt-8 text-center">
       <a
